@@ -1,0 +1,16 @@
+*.retry
+*.pyc
+*.idea
+*.sso
+playbooks/edw-archival/testing
+playbooks/lambda-layers-airnz/troposphere
+playbooks/lambda-layers-airnz/slackclient
+playbooks/lambda-layers-airnz/deepdiff
+**/.DS_Store
+.DS_Store
+/.terraform/
+**/.terraform/
+.tfstate
+.tfstate.*
+**.tfstate
+**.tfstate.*
