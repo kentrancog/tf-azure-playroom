@@ -15,6 +15,8 @@ resource "azurerm_subnet" "private" {
   resource_group_name  = azurerm_resource_group.network.name
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = ["172.20.0.0/24"]
+  service_endpoints    = ["Microsoft.Storage"]
+
 }
 
 resource "azurerm_subnet" "public" {
@@ -22,6 +24,7 @@ resource "azurerm_subnet" "public" {
   resource_group_name  = azurerm_resource_group.network.name
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = ["172.20.1.0/24"]
+  service_endpoints    = ["Microsoft.Storage"]
 }
 
 

@@ -102,10 +102,10 @@ resource "azurerm_storage_account" "premium_files" {
   account_kind             = "FileStorage"
   account_tier             = "Premium"
   account_replication_type = "LRS"
-  # network_rules {
-  #   default_action             = "Deny"
-  #   virtual_network_subnet_ids = [azurerm_subnet.private.id,azurerm_subnet.public.id]
-  # }
+  network_rules {
+    default_action             = "Deny"
+    virtual_network_subnet_ids = [azurerm_subnet.private.id, azurerm_subnet.public.id]
+  }
   tags = var.tags
 }
 
@@ -179,7 +179,7 @@ resource "azurerm_private_endpoint" "fileshare_endpoint" {
     is_manual_connection           = false
   }
   private_dns_zone_group {
-    name = "privatelink.file.core.windows.net"
+    name                 = "privatelink.file.core.windows.net"
     private_dns_zone_ids = [azurerm_private_dns_zone.storage_private_endpoint.id]
   }
   tags = var.tags
@@ -204,7 +204,7 @@ resource "azurerm_private_dns_zone_virtual_network_link" "vnet_storage_private_e
   resource_group_name   = azurerm_resource_group.vm.name
   private_dns_zone_name = azurerm_private_dns_zone.storage_private_endpoint.name
   virtual_network_id    = azurerm_virtual_network.vnet.id
-  registration_enabled  = true
-  tags                  = var.tags
+  # registration_enabled  = true
+  tags = var.tags
 
 }
