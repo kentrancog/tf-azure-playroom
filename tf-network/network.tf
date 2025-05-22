@@ -34,11 +34,11 @@ resource "azurerm_route_table" "public" {
 
 # Route to Internet (for public subnet)
 resource "azurerm_route" "public_internet" {
-  name                   = "internet-route"
-  resource_group_name    = azurerm_resource_group.network.name
-  route_table_name       = azurerm_route_table.public.name
-  address_prefix         = "0.0.0.0/0"
-  next_hop_type          = "Internet"
+  name                = "internet-route"
+  resource_group_name = azurerm_resource_group.network.name
+  route_table_name    = azurerm_route_table.public.name
+  address_prefix      = "0.0.0.0/0"
+  next_hop_type       = "Internet"
 }
 
 # Associate Public Route Table
