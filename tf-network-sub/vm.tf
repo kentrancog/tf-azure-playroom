@@ -12,17 +12,9 @@ resource "azurerm_network_interface" "vm_nic" {
     name                          = "vm-ip-config"
     subnet_id                     = azurerm_subnet.private.id
     private_ip_address_allocation = "Dynamic"
-    # public_ip_address_id          = azurerm_public_ip.vm_public_ip.id
   }
 }
 
-resource "azurerm_public_ip" "vm_public_ip" {
-  name                = "vm-public-ip"
-  location            = azurerm_resource_group.vm.location
-  resource_group_name = azurerm_resource_group.vm.name
-  allocation_method   = "Static"
-  sku                 = "Standard"
-}
 
 resource "azurerm_linux_virtual_machine" "vm" {
   name                = "vm-linux"
@@ -37,6 +29,11 @@ resource "azurerm_linux_virtual_machine" "vm" {
     username   = "azureuser"
     public_key = file("~/.ssh/id_rsa.pub") # Use your SSH public key path
   }
+  disable_password_authentication = true
+
+  #   admin_password = "<GENERATE YOUR OWN HERE>"
+  #   disable_password_authentication = false
+
 
   os_disk {
     caching              = "ReadWrite"
@@ -52,8 +49,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
   identity {
     type = "SystemAssigned"
   }
-  disable_password_authentication = true
-#   custom_data                     = base64encode(local.mount_script)
+  #   custom_data                     = base64encode(local.mount_script)
 }
 
 # locals {
@@ -64,4 +60,6 @@ resource "azurerm_linux_virtual_machine" "vm" {
 #     secret_name     = azurerm_key_vault_secret.storage_key.name
 #   })
 # }
+
+
 

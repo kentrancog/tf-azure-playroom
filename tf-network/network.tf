@@ -62,3 +62,18 @@ resource "azurerm_subnet_route_table_association" "private" {
   subnet_id      = azurerm_subnet.private.id
   route_table_id = azurerm_route_table.private.id
 }
+
+
+# Private DNS setup for vNet
+resource "azurerm_private_dns_zone" "storage_private_endpoint" {
+  name                = "privatelink.file.core.windows.net"
+  resource_group_name = azurerm_resource_group.vm.name
+}
+
+resource "azurerm_private_dns_zone_virtual_network_link" "vnet_storage_private_endpoint_link" {
+  name                  = "${azurerm_virtual_network.vnet.name}-storage-zone-link"
+  resource_group_name   = azurerm_resource_group.vm.name
+  private_dns_zone_name = azurerm_private_dns_zone.storage_private_endpoint.name
+  virtual_network_id    = azurerm_virtual_network.vnet.id
+  tags                  = var.tags
+}
