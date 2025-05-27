@@ -78,7 +78,7 @@ resource "azurerm_network_security_group" "vm_nsg" {
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "22"
-    source_address_prefixes    = ["121.74.0.14/32", "202.180.77.121/32"] # home ip, work ip
+    source_address_prefixes    = [chomp(data.http.my_ip.response_body)]
     destination_address_prefix = "*"
   }
 }

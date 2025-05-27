@@ -1,8 +1,3 @@
-# Get own public IP to add into storage account network rules so that modifications can be made from terraform via external calls
-data "http" "my_ip" {
-url = "https://ipv4.icanhazip.com"
-}
-
 resource "azurerm_storage_account" "premium_files" {
   name                     = "stpremiumfiles${random_string.suffix.result}" # must be globally unique
   resource_group_name      = azurerm_resource_group.vm.name

@@ -14,3 +14,8 @@ provider "azurerm" {
 }
 
 data "azurerm_client_config" "current" {}
+
+# Get own public IP to add into storage account network rules so that modifications can be made from terraform via external calls
+data "http" "my_ip" {
+url = "https://ipv4.icanhazip.com"
+}
