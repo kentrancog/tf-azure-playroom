@@ -13,3 +13,8 @@ variable "tags" {
     deployed_by = "Terraform"
   }
 }
+
+variable "admin_password" {
+    description = "The password for the created Windows VM"
+    type        = string
+}
