@@ -11,6 +11,7 @@ terraform {
 
 provider "azurerm" {
   features {}
+  subscription_id = var.subscription_id
 }
 
 data "azurerm_client_config" "current" {}
@@ -18,4 +19,14 @@ data "azurerm_client_config" "current" {}
 # Get own public IP to add into storage account network rules so that modifications can be made from terraform via external calls
 data "http" "my_ip" {
 url = "https://ipv4.icanhazip.com"
+}
+
+resource "azurerm_resource_group" "network" {
+  name     = "network-resources"
+  location = "australiaeast"
+}
+
+resource "azurerm_resource_group" "vm" {
+  name     = "vm-resources"
+  location = "australiaeast"
 }

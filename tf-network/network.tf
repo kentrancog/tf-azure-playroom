@@ -1,8 +1,3 @@
-resource "azurerm_resource_group" "network" {
-  name     = "network-resources"
-  location = "australiaeast"
-}
-
 resource "azurerm_virtual_network" "vnet" {
   name                = "vnet"
   address_space       = ["172.20.0.0/16"]

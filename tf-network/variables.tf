@@ -18,3 +18,15 @@ variable "admin_password" {
     description = "The password for the created Windows VM"
     type        = string
 }
+
+variable "subscription_id" {
+  description = "The Azure subscription ID where the resources will be created."
+  type        = string
+  default     = "cc9edc29-0131-47da-b178-c9ffb6e7e2df"
+}
+
+variable "backup_file_share" {
+  description = "Whether to backup the file share on with Recovery Services Vault"
+  type        = number
+  default     = 1
+}
